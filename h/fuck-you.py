@@ -1,0 +1,1 @@
+print("toan oc cho")
