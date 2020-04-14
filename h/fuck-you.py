@@ -1,1 +1,0 @@
-print("toan oc cho")
