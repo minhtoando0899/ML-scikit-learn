@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2906193f-fa65-414d-869d-ab0d4b6eab8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/miscellaneous_examples/7.comparing_anomaly_detection_algorithms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/miscellaneous_examples/8.the_Johnson_lindenstrauss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/miscellaneous_examples/9.comparison_of_kernel_ridge_regression_and_SVR.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/init.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/init.py" afterDir="false" />
-    </list>
+    <list default="true" id="2906193f-fa65-414d-869d-ab0d4b6eab8f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
