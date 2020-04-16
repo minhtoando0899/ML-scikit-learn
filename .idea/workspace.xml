@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2906193f-fa65-414d-869d-ab0d4b6eab8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/miscellaneous_examples/hello.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/miscellaneous_examples/10.explicit_feature_map_approximation_for_RBF_kernels.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/init.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/init.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,11 +34,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ChangesTree.GroupingKeys" value="directory&#10;repository" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
-  <component name="RunManager" selected="Python.hello (1)">
-    <configuration name="5.face_completion_with_a_multi-output_estimators" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.10.explicit_feature_map_approximation_for_RBF_kernels">
+    <configuration name="10.explicit_feature_map_approximation_for_RBF_kernels" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ML scikit learn" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -46,11 +47,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MiscellaneousExamples" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/miscellaneous_examples" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MiscellaneousExamples/5.face_completion_with_a_multi-output_estimators.py" />
+      <option name="SCRIPT_NAME" value="E:\ML scikit learn\miscellaneous_examples\10.explicit_feature_map_approximation_for_RBF_kernels.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -80,7 +81,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="hello (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="explicit_feature_map_approximation_for_RBF_kernels" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ML scikit learn" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -92,7 +93,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/miscellaneous_examples/hello.py" />
+      <option name="SCRIPT_NAME" value="E:\ML scikit learn\miscellaneous_examples\explicit_feature_map_approximation_for_RBF_kernels" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -144,19 +145,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.5.face_completion_with_a_multi-output_estimators" />
       <item itemvalue="Python.hello" />
       <item itemvalue="Python.9.comparison_of_kernel_ridge_regression_and_SVR" />
       <item itemvalue="Python.init" />
-      <item itemvalue="Python.hello (1)" />
+      <item itemvalue="Python.explicit_feature_map_approximation_for_RBF_kernels" />
+      <item itemvalue="Python.10.explicit_feature_map_approximation_for_RBF_kernels" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.hello (1)" />
+        <item itemvalue="Python.10.explicit_feature_map_approximation_for_RBF_kernels" />
         <item itemvalue="Python.init" />
+        <item itemvalue="Python.explicit_feature_map_approximation_for_RBF_kernels" />
         <item itemvalue="Python.9.comparison_of_kernel_ridge_regression_and_SVR" />
         <item itemvalue="Python.hello" />
-        <item itemvalue="Python.5.face_completion_with_a_multi-output_estimators" />
       </list>
     </recent_temporary>
   </component>
@@ -202,30 +203,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="147" y="64" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586895300188" />
-    <state width="1515" height="213" key="GridCell.Tab.0.bottom" timestamp="1586896098424">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1587069658010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="213" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586896098424" />
-    <state width="1515" height="213" key="GridCell.Tab.0.center" timestamp="1586896098424">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587069658010" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1587069658010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="213" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586896098424" />
-    <state width="1515" height="213" key="GridCell.Tab.0.left" timestamp="1586896098424">
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587069658010" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1587069658010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="213" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586896098424" />
-    <state width="1515" height="213" key="GridCell.Tab.0.right" timestamp="1586896098424">
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587069658010" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1587069658010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="213" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586896098424" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587069658010" />
     <state x="277" y="55" key="SettingsEditor" timestamp="1586896084873">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586896084873" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586895392135">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1587069816678">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586895392135" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587069816678" />
     <state x="826" y="100" width="616" height="630" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1586887931074">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -234,5 +235,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="944" y="332" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1586893832617" />
+    <state x="777" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1587066205494">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="777" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1587066205494" />
   </component>
 </project>
