@@ -1,10 +1,39 @@
+"""
+==================================================
+Explicit feature map approximation for RBF kernels
+==================================================
+"""
+
+# An example illustrating the approximation of the feature map of an RBF kernel.
+
+# It shows how to use RBFSampler and Nystroem to approximate the feature map of an
+# RBF kernel for classification with an SVM on the digits dataset. Results using a
+# linear SVM in the original space, a linear SVM using the approximate mappings and
+# using a kernelized SVM are compared. Timings and accuracy for varying amounts of
+# Monte Carlo samplings (in the case of RBFSampler, which uses random Fourier features)
+# and different sized subsets of the training set (for Nystroem) for the approximate
+# mapping are shown.
+
+# Please note that the dataset here is not large enough to show the benefits of kernel
+# approximation, as the exact SVM is still reasonably fast.
+
+# Sampling more dimensions clearly leads to better classification results, but comes
+# at a greater cost. This means there is a tradeoff between runtime and accuracy,
+# given by the parameter n_components. Note that solving the Linear SVM and also the
+# approximate kernel SVM could be greatly accelerated by using stochastic gradient
+# descent via sklearn.linear_model.SGDClassifier. This is not easily possible for
+# the case of the kernelized SVM.
+
+# ##################################################################################
+# Python package and dataset imports, load dataset
+# ------------------------------------------------
+
 # Author: Gael Varoquaux <gael dot varoquaux at normalesup dot org>
 #         Andreas Mueller <amueller@ais.uni-bonn.de>
 # License: BSD 3 clause
-
 print(__doc__)
 
-# Standard scientific Python imports
+# standard scientific Python imports
 import matplotlib.pyplot as plt
 import numpy as np
 from time import time
@@ -18,9 +47,12 @@ from sklearn.decomposition import PCA
 # The digits dataset
 digits = datasets.load_digits(n_class=9)
 
-# #################################################################################
+# ###################################################################################
 # Timing and accuracy plots
-# --------------------------
+# -------------------------
+
+# To apply an classifier on this data, we need to flatten the image, to turn the data
+# in a (samples, feature) matrix:
 
 n_samples = len(digits.data)
 data = digits.data / 16.
@@ -29,7 +61,6 @@ data -= data.mean(axis=0)
 # We learn the digits on the first half of the digits
 data_train, targets_train = (data[:n_samples // 2],
                              digits.target[:n_samples // 2])
-
 
 # Now predict the value of the digit on the second half:
 data_test, targets_test = (data[n_samples // 2:],
@@ -41,16 +72,15 @@ kernel_svm = svm.SVC(gamma=.2)
 linear_svm = svm.LinearSVC()
 
 # create pipeline from kernel approximation
-# and linear svm
+# ang linear svm
 feature_map_fourier = RBFSampler(gamma=.2, random_state=1)
 feature_map_nystroem = Nystroem(gamma=.2, random_state=1)
 fourier_approx_svm = pipeline.Pipeline([("feature_map", feature_map_fourier),
                                         ("svm", svm.LinearSVC())])
-
 nystroem_approx_svm = pipeline.Pipeline([("feature_map", feature_map_nystroem),
-                                        ("svm", svm.LinearSVC())])
+                                         ("svm", svm.LinearSVC())])
 
-# fit and predict using linear and kernel svm:
+# fit and predic using linear and kernel svm:
 
 kernel_svm_time = time()
 kernel_svm.fit(data_train, targets_train)
@@ -84,7 +114,7 @@ for D in sample_sizes:
     nystroem_scores.append(nystroem_score)
     fourier_scores.append(fourier_score)
 
-# plot the results:
+# plot the result:
 plt.figure(figsize=(16, 4))
 accuracy = plt.subplot(121)
 # second y axis for timings
@@ -94,9 +124,9 @@ accuracy.plot(sample_sizes, nystroem_scores, label="Nystroem approx. kernel")
 timescale.plot(sample_sizes, nystroem_times, '--',
                label='Nystroem approx. kernel')
 
-accuracy.plot(sample_sizes, fourier_scores, label="Fourier approx. kernel")
+accuracy.plot(sample_sizes, fourier_scores, label='Fourier approxy. kernel')
 timescale.plot(sample_sizes, fourier_times, '--',
-               label='Fourier approx. kernel')
+               label='Fourier approxy.kernel')
 
 # horizontal lines for exact rbf and linear kernels:
 accuracy.plot([sample_sizes[0], sample_sizes[-1]],
@@ -125,6 +155,20 @@ accuracy.legend(loc='best')
 timescale.legend(loc='best')
 plt.tight_layout()
 plt.show()
+
+# ###################################################################################
+# Decision Surfaces of RBF Kernel SVM and Linear SVM
+# --------------------------------------------------
+
+# The second plot visualized the decision surfaces of the RBF kernel SVM and the linear
+# SVM with approximate kernel maps. The plot shows decision surfaces of the classifiers
+# projected onto the first two principal components of the data. This visualization
+# should be taken with a grain of salt since it is just an interesting slice through
+# the decision surface in 64 dimensions. In particular note that a datapoint (represented as a dot)
+# does not necessarily be classified into the region it is lying in, since it will not
+# lie on the plane that the first two principal components span. The usage of RBFSampler
+# and Nystroem is described in detail in Kernel Approximation.
+
 # visualize the decision surface, projected down to the first
 # two principal components of the dataset
 pca = PCA(n_components=8).fit(data_train)
@@ -133,7 +177,7 @@ X = pca.transform(data_train)
 
 # Generate grid along first two principal components
 multiples = np.arange(-2, 2, 0.1)
-# steps along first component
+# step along first component
 first = multiples[:, np.newaxis] * pca.components_[0, :]
 # steps along second component
 second = multiples[:, np.newaxis] * pca.components_[1, :]
@@ -143,10 +187,10 @@ flat_grid = grid.reshape(-1, data.shape[1])
 
 # title for the plots
 titles = ['SVC with rbf kernel',
-          'SVC (linear kernel)\n with Fourier rbf feature map\n'
-          'n_components=100',
-          'SVC (linear kernel)\n with Nystroem rbf feature map\n'
-          'n_components=100']
+         'SVC (linear kernel)\n with Fourier rbf feature map\n'
+         'n_components=100',
+         'SVC (linear kernel)\n with Nystroem rbf feature map\n'
+         'n_components=100']
 
 plt.figure(figsize=(18, 7.5))
 plt.rcParams.update({'font.size': 14})
@@ -166,7 +210,6 @@ for i, clf in enumerate((kernel_svm, nystroem_approx_svm,
     # Plot also the training points
     plt.scatter(X[:, 0], X[:, 1], c=targets_train, cmap=plt.cm.Paired,
                 edgecolors=(0, 0, 0))
-
     plt.title(titles[i])
 plt.tight_layout()
 plt.show()
