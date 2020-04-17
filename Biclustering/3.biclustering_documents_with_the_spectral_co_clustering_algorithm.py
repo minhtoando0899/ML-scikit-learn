@@ -1,3 +1,24 @@
+"""
+================================================================
+Biclustering documents with the Spectral Co-clustering algorithm
+================================================================
+"""
+# This example demonstrates the Spectral Co-clustering algorithm on the twenty newsgroups
+# dataset. The ‘comp.os.ms-windows.misc’ category is excluded because it contains many
+# posts containing nothing but data.
+
+# The TF-IDF vectorized posts form a word frequency matrix, which is then biclustered
+# using Dhillon’s Spectral Co-Clustering algorithm. The resulting document-word biclusters
+# indicate subsets words used more often in those subsets documents.
+
+# For a few of the best biclusters, its most common document categories and its ten most
+# important words get printed. The best biclusters are determined by their normalized cut.
+# The best words are determined by comparing their sums inside and outside the bicluster.
+
+# For comparison, the documents are also clustered using MiniBatchKMeans. The document
+# clusters derived from the biclusters achieve a better V-measure than clusters found by
+# MiniBatchKMeans.
+
 from collections import defaultdict
 import operator
 from time import time
@@ -14,12 +35,13 @@ print(__doc__)
 
 
 def number_normalizer(tokens):
-    """ Map all numeric tokens to a placeholder.
+    """Map all numeric tokens to a placeholder.
 
     For many applications, tokens that begin with a number are not directly
     useful, but the fact that such a token exists can be relevant.  By applying
     this form of dimensionality reduction, some methods may perform better.
     """
+
     return ("#NUMBER" if token[0].isdigit() else token for token in tokens)
 
 
@@ -38,8 +60,8 @@ categories = ['alt.atheism', 'comp.graphics',
               'sci.med', 'sci.space', 'soc.religion.christian',
               'talk.politics.guns', 'talk.politics.mideast',
               'talk.politics.misc', 'talk.religion.misc']
-newsgroups = fetch_20newsgroups(categories=categories)
-y_true = newsgroups.target
+newsgruops = fetch_20newsgroups(categories=categories)
+y_true = newsgruops.target
 
 vectorizer = NumberNormalizingVectorizer(stop_words='english', min_df=5)
 cocluster = SpectralCoclustering(n_clusters=len(categories),
@@ -47,29 +69,29 @@ cocluster = SpectralCoclustering(n_clusters=len(categories),
 kmeans = MiniBatchKMeans(n_clusters=len(categories), batch_size=20000,
                          random_state=0)
 
-print("Vectorizing...")
-X = vectorizer.fit_transform(newsgroups.data)
+print("Vectoeizing...")
+X = vectorizer.fit_transform(newsgruops.data)
 
 print("Coclustering...")
 start_time = time()
 cocluster.fit(X)
 y_cocluster = cocluster.row_labels_
-print("Done in {:.2f}s. V-measure: {:.4f}".format(
+print("Done in {: .2}s. V-measure: {: .4f}".format(
     time() - start_time,
     v_measure_score(y_cocluster, y_true)))
 
-print("MiniBatchKMeans...")
+print("MinibatchKmeans...")
 start_time = time()
 y_kmeans = kmeans.fit_predict(X)
-print("Done in {:.2f}s. V-measure: {:.4f}".format(
+print("Done in {: .2f}. V-meansure: {: .4}".format(
     time() - start_time,
     v_measure_score(y_kmeans, y_true)))
 
 feature_names = vectorizer.get_feature_names()
-document_names = list(newsgroups.target_names[i] for i in newsgroups.target)
+document_names = list(newsgruops.target_names[i] for i in newsgruops.target)
 
 
-def bicluster_ncut(i):
+def bicluter_ncut(i):
     rows, cols = cocluster.get_indices(i)
     if not (np.any(rows) and np.any(cols)):
         import sys
@@ -87,18 +109,18 @@ def bicluster_ncut(i):
 def most_common(d):
     """Items of a defaultdict(int) with the highest values.
 
-    Like Counter.most_common in Python >=2.7.
+    like Counter.most_common in Python ?= 2.7.
     """
     return sorted(d.items(), key=operator.itemgetter(1), reverse=True)
 
 
-bicluster_ncuts = list(bicluster_ncut(i)
-                       for i in range(len(newsgroups.target_names)))
+bicluster_ncuts = list(bicluter_ncut(i)
+                       for i in range(len(newsgruops.target_names)))
 best_idx = np.argsort(bicluster_ncuts)[:5]
 
 print()
-print("Best biclusters:")
-print("----------------")
+print("Best bicluster:")
+print("---------------")
 for idx, cluster in enumerate(best_idx):
     n_rows, n_cols = cocluster.get_shape(cluster)
     cluster_docs, cluster_words = cocluster.get_indices(cluster)
@@ -109,7 +131,7 @@ for idx, cluster in enumerate(best_idx):
     counter = defaultdict(int)
     for i in cluster_docs:
         counter[document_names[i]] += 1
-    cat_string = ", ".join("{:.0f}% {}".format(float(c) / n_rows * 100, name)
+    cat_string = ", ".join("{: .0f}% {}".format(float(c) / n_rows * 100, name)
                            for name, c in most_common(counter)[:3])
 
     # words
@@ -120,9 +142,9 @@ for idx, cluster in enumerate(best_idx):
                            word_col[out_of_cluster_docs, :].sum(axis=0))
     word_scores = word_scores.ravel()
     important_words = list(feature_names[cluster_words[i]]
-                           for i in word_scores.argsort()[:-11:-1])
+                           for i in word_scores.argsort()[: -11:-1])
 
     print("bicluster {} : {} documents, {} words".format(
         idx, n_rows, n_cols))
-    print("categories   : {}".format(cat_string))
-    print("words        : {}\n".format(', '.join(important_words)))
+    print("categories  : {}".format(cat_string))
+    print("words       :  {}\n".format(', '.join(important_words)))
