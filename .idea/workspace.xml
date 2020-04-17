@@ -144,8 +144,8 @@
       <item itemvalue="Python.10.explicit_feature_map_approximation_for_RBF_kernels" />
       <item itemvalue="Python.1.a_demo_of_the_spectral_co_clustering_algorithm" />
       <item itemvalue="Python.2.a_demo_of_the_spectral_biclustering_algorithm" />
-      <item itemvalue="Python.3.biclustering_documents_with_the_spectral_co_clustering_algorithm" />
       <item itemvalue="Python.__init__" />
+      <item itemvalue="Python.3.biclustering_documents_with_the_spectral_co_clustering_algorithm" />
     </list>
     <recent_temporary>
       <list>
@@ -178,6 +178,42 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/MiscellaneousExamples" />
@@ -187,18 +223,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="ML" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="71" key="#Notifications" timestamp="1587069904012">
+    <state x="361" y="71" key="#Notifications" timestamp="1587131001040">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="71" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1587069904012" />
+    <state x="361" y="71" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1587131001040" />
     <state x="424" y="3" key="CommitChangelistDialog2" timestamp="1586895374579">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="424" y="3" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586895374579" />
-    <state x="147" y="64" key="DiffContextDialog" timestamp="1586895300188">
+    <state x="147" y="64" width="1228" height="687" key="DiffContextDialog" timestamp="1587131054049">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="147" y="64" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586895300188" />
+    <state x="147" y="64" width="1228" height="687" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1587131054049" />
     <state width="825" height="258" key="GridCell.Tab.0.bottom" timestamp="1587123561353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -247,6 +283,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="944" y="332" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1586893832617" />
+    <state x="558" y="204" key="git4idea.merge.GitMergeDialog" timestamp="1587130969187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="558" y="204" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1587130969187" />
     <state x="777" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1587092640545">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
