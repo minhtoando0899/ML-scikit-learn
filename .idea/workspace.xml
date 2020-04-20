@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2906193f-fa65-414d-869d-ab0d4b6eab8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Calibration/1.ComparisonOfCalibrationOfClassifier.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calibration/2.ProbabilityCalibrationCurves.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calibration/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calibration/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +90,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
-  <component name="RunManager" selected="Python.3.ProbabilityCalibrationOfClassifiers">
+  <component name="RunManager" selected="Python.ProbabilityCalibrationFor3-ClassClassification">
     <configuration name="1.ComparisonOfCalibrationOfClassifier" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ML scikit learn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -157,7 +154,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="3.biclustering_documents_with_the_spectral_co_clustering_algorithm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="ProbabilityCalibrationFor3-ClassClassification" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ML scikit learn" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -165,11 +162,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Biclustering" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Calibration" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\ML scikit learn\Biclustering\3.biclustering_documents_with_the_spectral_co_clustering_algorithm.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Calibration/ProbabilityCalibrationFor3-ClassClassification.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -200,19 +197,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.3.biclustering_documents_with_the_spectral_co_clustering_algorithm" />
       <item itemvalue="Python.__init__ (1)" />
       <item itemvalue="Python.1.ComparisonOfCalibrationOfClassifier" />
       <item itemvalue="Python.2.ProbabilityCalibrationCurves" />
       <item itemvalue="Python.3.ProbabilityCalibrationOfClassifiers" />
+      <item itemvalue="Python.ProbabilityCalibrationFor3-ClassClassification" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ProbabilityCalibrationFor3-ClassClassification" />
         <item itemvalue="Python.3.ProbabilityCalibrationOfClassifiers" />
         <item itemvalue="Python.2.ProbabilityCalibrationCurves" />
         <item itemvalue="Python.1.ComparisonOfCalibrationOfClassifier" />
         <item itemvalue="Python.__init__ (1)" />
-        <item itemvalue="Python.3.biclustering_documents_with_the_spectral_co_clustering_algorithm" />
       </list>
     </recent_temporary>
   </component>
@@ -318,22 +315,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="147" y="64" width="1228" height="687" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1587131340455" />
-    <state width="826" height="207" key="GridCell.Tab.0.bottom" timestamp="1587231741417">
+    <state width="828" height="203" key="GridCell.Tab.0.bottom" timestamp="1587402444926">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="826" height="207" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587231741417" />
-    <state width="826" height="207" key="GridCell.Tab.0.center" timestamp="1587231741417">
+    <state width="828" height="203" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587402444926" />
+    <state width="828" height="203" key="GridCell.Tab.0.center" timestamp="1587402444926">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="826" height="207" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587231741417" />
-    <state width="826" height="207" key="GridCell.Tab.0.left" timestamp="1587231741417">
+    <state width="828" height="203" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587402444926" />
+    <state width="828" height="203" key="GridCell.Tab.0.left" timestamp="1587402444926">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="826" height="207" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587231741417" />
-    <state width="826" height="207" key="GridCell.Tab.0.right" timestamp="1587231741417">
+    <state width="828" height="203" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587402444926" />
+    <state width="828" height="203" key="GridCell.Tab.0.right" timestamp="1587402444926">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="826" height="207" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587231741417" />
+    <state width="828" height="203" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587402444926" />
     <state width="825" height="258" key="GridCell.Tab.1.bottom" timestamp="1587123561353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
