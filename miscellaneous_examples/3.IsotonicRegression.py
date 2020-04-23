@@ -1,13 +1,13 @@
 """
 ===================
-Isotonic Regression
+Hồi quy Đẳng hướng
 ===================
-An illustration of the isotonic regression on generated data.
-The isotonic regression finds a non-decreasing approximation
-of a function while minimizing the mean squared error on the
-training data. The benefit of such a model is that it does
-not assume any form for the target function such as linearity.
-For comparison a linear regression is also presented.
+Một minh họa về hồi quy đẳng hướng trên dữ liệu được tạo.
+Hồi quy đẳng hướng tìm thấy một xấp xỉ không giảm của hàm
+trong khi giảm thiểu sai số bình phương trung bình trên
+dữ liệu huấn luyện. Lợi ích của một mô hình như vậy là nó
+không giả định bất kỳ hình thức nào cho hàm mục tiêu như
+tuyến tính. Để so sánh một hồi quy tuyến tính cũng được trình bày.
 """
 print(__doc__)
 
@@ -24,14 +24,14 @@ rs = check_random_state(0)
 y = rs.randint(-50, 50, size=(n,)) + 50. * np.log1p(np.arange(n))
 
 # ###############################################################################
-# FIt IsotonicRegression and LinearRegression models
+# Các mô hình Fit IsotonicRegression và linearRegression
 ir = IsotonicRegression()
 y_ = ir.fit_transform(x, y)
 lr = LinearRegression()
-lr.fit(x[:, np.newaxis], y)  # x needs to be 2b for LinearRegreession
+lr.fit(x[:, np.newaxis], y)  # x cần là 2d cho linearRegression
 
 # ###############################################################################
-# plot result
+# kết quả phác họa
 
 segments = [[[i, y[i]], [i, y_[i]]] for i in range(n)]
 lc = LineCollection(segments, zorder=0)

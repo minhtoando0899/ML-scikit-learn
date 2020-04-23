@@ -3,32 +3,30 @@
 Comparison of kernel ridge regression and SVR
 =============================================
 """
-# Both kernel ridge regression (KRR) and SVR learn a non-linear function by
-# employing the kernel trick, i.e., they learn a linear function in the space
-# induced by the respective kernel which corresponds to a non-linear function
-# in the original space. They differ in the loss functions (ridge versus
-# epsilon-insensitive loss). In contrast to SVR, fitting a KRR can be done in
-# closed-form and is typically faster for medium-sized datasets. On the other
-# hand, the learned model is non-sparse and thus slower than SVR at prediction-time.
+# Cả hồi quy sườn hạt nhân (KRR) và SVR đều học một hàm phi tuyến tính bằng cách
+# sử dụng thủ thuật kernel, tức là, chúng học một hàm tuyến tính trong không gian
+# do hạt nhân tương ứng tạo ra tương ứng với hàm phi tuyến tính trong không gian
+# ban đầu. Chúng khác nhau ở các hàm mất (sườn so với mất không nhạy cảm với epsilon).
+# Trái ngược với SVR, việc lắp KRR có thể được thực hiện ở dạng đóng và thường
+# nhanh hơn đối với các bộ dữ liệu cỡ trung bình. Mặt khác, mô hình đã học là không
+# thưa thớt và do đó chậm hơn so với SVR tại thời điểm dự đoán.
+#
+# Ví dụ này minh họa cả hai phương pháp trên một tập dữ liệu nhân tạo, bao gồm hàm
+# mục tiêu hình sin và nhiễu mạnh được thêm vào mỗi datapoint thứ năm. Hình đầu tiên
+# so sánh mô hình đã học của KRR và SVR khi cả độ phức tạp / chính quy hóa và băng
+# thông của hạt nhân RBF được tối ưu hóa bằng cách sử dụng tìm kiếm dạng lưới. Các
+# chức năng đã học rất giống nhau; tuy nhiên, KRR phù hợp là khoảng. nhanh hơn bảy
+# lần so với lắp SVR (cả hai đều có lưới tìm kiếm). Tuy nhiên, dự đoán 100000 giá
+# trị mục tiêu nhanh hơn nhiều lần so với SVR vì nó đã học được một mô hình thưa thớt
+# chỉ sử dụng khoảng. 1/3 trong số 100 datapoint đào tạo như các vectơ hỗ trợ.
+#
+# Hình tiếp theo so sánh thời gian để phù hợp và dự đoán KRR và SVR cho các kích cỡ
+# khác nhau của tập huấn luyện. Lắp KRR nhanh hơn SVR cho các bộ huấn luyện cỡ trung bình
+# (dưới 1000 mẫu); tuy nhiên, đối với tập huấn luyện lớn hơn, thang điểm SVR tốt hơn.
+# Về thời gian dự đoán, SVR nhanh hơn KRR cho tất cả các kích cỡ của tập huấn luyện vì
+# giải pháp thưa thớt đã học. Lưu ý rằng mức độ thưa thớt và do đó thời gian dự đoán
+# phụ thuộc vào các tham số epsilon và C của SVR.
 
-# This example illustrates both methods on an artificial dataset, which consists
-# of a sinusoidal target function and strong noise added to every fifth datapoint.
-# The first figure compares the learned model of KRR and SVR when both
-# complexity/regularization and bandwidth of the RBF kernel are optimized using grid-search.
-# The learned functions are very similar; however, fitting KRR is approx. seven times faster
-# than fitting SVR (both with grid-search). However, prediction of 100000 target values is more
-# than tree times faster with SVR since it has learned a sparse model using only approx. 1/3 of
-# the 100 training datapoints as support vectors.
-
-# The next figure compares the time for fitting and prediction of KRR and SVR for different
-# sizes of the training set. Fitting KRR is faster than SVR for medium- sized training sets
-# (less than 1000 samples); however, for larger training sets SVR scales better. With regard
-# to prediction time, SVR is faster than KRR for all sizes of the training set because of the
-# learned sparse solution. Note that the degree of sparsity and thus the prediction time depends
-# on the parameters epsilon and C of the SVR.
-
-# Authors: Jan Hendrik Metzen <jhm@informatik.uni-bremen.de>
-# License: BSD 3 clause
 
 import time
 
@@ -43,17 +41,17 @@ import matplotlib.pyplot as plt
 rng = np.random.RandomState(0)
 
 #################################################################
-# Generate sample data
+# Tạo dữ liệu mẫu
 X = 5 * rng.rand(10000, 1)
 y = np.sin(X).ravel()
 
-# Add noise to targets
+# Thêm tiếng ồn cho mục tiêu
 y[::5] += 3 * (0.5 - rng.rand(X.shape[0] // 5))
 
 X_plot = np.linspace(0, 5, 100000)[:, None]
 
 ##################################################################
-# Fit regression model
+# Mô hình hồi quy phù hợp
 train_size = 100
 svr = GridSearchCV(SVR(kernel='rbf', gamma=0.1),
                    param_grid={"C": [1e0, 1e1, 1e2, 1e3],
@@ -89,7 +87,7 @@ print("KRR prediction for %d inputs %.3f s"
       % (X_plot.shape[0], kr_predict))
 
 #######################################################################
-# Look at the result
+# Nhìn vào kết quả
 sv_ind = svr.best_estimator_.support_
 plt.scatter(X[sv_ind], y[sv_ind], c='r', s=50, label='SVR support vectors',
             zorder=2, edgecolors=(0, 0, 0))
@@ -104,10 +102,10 @@ plt.ylabel('target')
 plt.title('SVR versus kernel Ridge')
 plt.legend()
 
-# Visualize training and prediction time
+# Trực quan hóa thời gian đào tạo và dự đoán
 plt.figure()
 
-# Generate sample data
+# Tạo dữ liệu mẫu
 X = 5 * rng.rand(10000, 1)
 y = np.sin(X).ravel()
 y[::5] += 3 * (0.5 - rng.rand(X.shape[0] // 5))
@@ -138,7 +136,7 @@ plt.ylabel("Time (second)")
 plt.title("Execution Time")
 plt.legend(loc="best")
 
-# VIsualize learning curves
+# Trực quan hóa các đường cong học tập
 plt.figure()
 
 svr = SVR(kernel='rbf', C=1e1, gamma=0.1)

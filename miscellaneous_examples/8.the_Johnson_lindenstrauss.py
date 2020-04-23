@@ -1,11 +1,11 @@
 """
-=====================================================================
-The Johnson-Lindenstrauss bound for embedding with random projections
-=====================================================================
+=========================================================================
+Johnson-Lindenstrauss bị ràng buộc để nhúng với các phép chiếu ngẫu nhiên
+=========================================================================
 """
-# The Johnson-Lindenstrauss lemma states that any high dimensional dataset
-# can be randomly projected into a lower dimensional Euclidean space while
-# controlling the distortion in the pairwise distances.
+# Bổ đề Johnson-Lindenstrauss nói rằng bất kỳ tập dữ liệu chiều cao nào cũng
+# có thể được chiếu ngẫu nhiên vào không gian Euclide chiều thấp hơn trong khi
+# kiểm soát biến dạng trong khoảng cách theo cặp.
 
 print(__doc__)
 
@@ -28,28 +28,30 @@ else:
     density_param = {'normed': True}
 
 ####################################################################
-# Theoretical bounds
+# Giới hạn lý thuyết
 # ------------------------------------------------------------------
 
-# The distortion introduced by a random projection p is asserted by the fact
-# that p is defining an eps-embedding with good probability as defined by:
+# Biến thể được giới thiệu bởi một phép chiếu ngẫu nhiên p được khẳng định bởi
+# thực tế là p đang xác định nhúng eps với xác suất tốt như được định nghĩa bởi:
 # (1 - eps) \|u - v\|^2 < \|p(u) - p(v)\|^2 < (1 + eps) \|u - v\|^2
 
-# Where u and v are any rows taken from a dataset of shape [n_samples, n_features]
-# and p is a projection by a random Gaussian N(0, 1) matrix with shape [n_components, n_features]
-# (or a sparse Achlioptas matrix).
-
-# The minimum number of components to guarantees the eps-embedding is given by:
+# Trong đó u và v là bất kỳ hàng nào được lấy từ bộ dữ liệu hình dạng
+# [n_samples, n_features] và p là hình chiếu của ma trận Gaussian N (0, 1)
+# ngẫu nhiên có hình dạng [n_components, n_features] (hoặc ma trận
+# Achlioptas thưa thớt).
+#
+# Số lượng thành phần tối thiểu để đảm bảo nhúng eps được đưa ra bởi:
 # n\_components >= 4 log(n\_samples) / (eps^2 / 2 - eps^3 / 3)
 
-# The first plot shows that with an increasing number of samples n_samples, the minimal
-# number of dimensions n_components increased logarithmically in order to guarantee an eps-embedding.
+# Biểu đồ đầu tiên cho thấy với số lượng mẫu n_samples ngày càng tăng,
+# số lượng kích thước tối thiểu n_components đã tăng logarit để
+# đảm bảo nhúng eps.
 
-# range of admissible distortions
+# phạm vi biến dạng được chấp nhận
 eps_range = np.linspace(0.1, 0.99, 5)
 colors = plt.cm.Blues(np.linspace(0.3, 1.0, len(eps_range)))
 
-# range of number of samples (observation) to embed
+# phạm vi số lượng mẫu (quan sát) để nhúng
 n_samples_range = np.logspace(1, 9, 9)
 
 plt.figure()
@@ -63,14 +65,14 @@ plt.ylabel("Minimum number of dimensions")
 plt.title("Johnson-Linderstrauss bounds\nn_samples vs n_components")
 plt.show()
 
-# The second plot shows that an increase of the admissible distortion eps allows
-# to reduce drastically the minimal number of dimensions n_components for a given
-# number of samples n_samples
+# Biểu đồ thứ hai cho thấy rằng sự gia tăng của méo méo có thể chấp nhận
+# cho phép giảm đáng kể số lượng kích thước tối thiểu cho một số
+# lượng mẫu n_samples đã cho
 
-# range of admissible distortions
+# phạm vi biến dạng được chấp nhận
 eps_range = np.linspace(0.01, 0.99, 100)
 
-# range of number of samples (observation) to embed
+# phạm vi số lượng mẫu (quan sát) để nhúng
 n_samples_range = np.logspace(2, 6, 5)
 colors = plt.cm.Blues(np.linspace(0.3, 1.0, len(n_samples_range)))
 
@@ -85,32 +87,33 @@ plt.ylabel("Minimum number of dimensions")
 plt.title("Johnson-Lindenstrauss bounds: \nn_components vs eps")
 plt.show()
 
-###############################################################################
-# Empirical validation
+# ##############################################################################
+# Xác nhận thực nghiệm
 # --------------------
-# We validate the above bounds on the 20 newsgroups text document (TF-IDF word
-# frequencies) dataset or on the digits dataset:
-#
-# for the 20 newsgroups dataset some 500 documents with 100k features in total
-# are projected using a sparse random matrix to smaller euclidean spaces with
-# various values for the target number of dimensions n_components.
-#
-# for the digits dataset, some 8x8 gray level pixels data for 500 handwritten
-# digits pictures are randomly projected to spaces for various larger number of
-# dimensions n_components.
-#
-# The default dataset is the 20 newsgroups dataset. To run the example on the digits
-# dataset, pass the --use-digits-dataset command line argument to this script.
+# Chúng tôi xác nhận các giới hạn trên trên tập dữ liệu văn bản 20 nhóm tin (tần số từ TF-IDF)
+# hoặc trên tập dữ liệu chữ số:
+
+# đối với 20 tập tin nhóm dữ liệu, khoảng 500 tài liệu với tổng số 100 nghìn tính năng được
+# dự kiến ​​sử dụng ma trận ngẫu nhiên thưa thớt đến các không gian euclide nhỏ hơn với các
+# giá trị khác nhau cho số lượng kích thước mục tiêu n_components.
+
+# đối với tập dữ liệu chữ số, một số dữ liệu pixel độ xám 8 x 8 cho 500 hình ảnh chữ số viết tay
+# được chiếu ngẫu nhiên vào khoảng trắng cho số lượng kích thước lớn hơn n_components.
+
+# Bộ dữ liệu mặc định là bộ dữ liệu 20 nhóm tin. Để chạy ví dụ trên tập dữ liệu chữ số, chuyển đối
+# số dòng lệnh --use-chữ số-tập dữ liệu cho tập lệnh này.
 
 if '__use-digits-dataset' in sys.argv:
     data = load_digits().data[:500]
 else:
     data = fetch_20newsgroups_vectorized().data[:500]
 
-# For each value of n_components, we plot:
-# 2D distribution of sample pairs with pairwise distances in original
-# and projected spaces as x and y axis respectively.
-# 1D histogram of the ratio of those distances (projected / original).
+# Đối với mỗi giá trị của n_components, chúng tôi vẽ:
+
+# Phân phối 2D của các cặp mẫu với khoảng cách theo cặp trong không gian ban đầu và được chiếu
+# theo trục x và y tương ứng.
+
+# Biểu đồ 1D của tỷ lệ các khoảng cách đó (dự kiến / bản gốc).
 
 n_samples, n_features = data.shape
 print("Embedding %d samples with dim %d using various random projections"
@@ -119,7 +122,7 @@ print("Embedding %d samples with dim %d using various random projections"
 n_components_range = np.array([300, 1000, 10000])
 dists = euclidean_distances(data, squared=True).ravel()
 
-# select only non-identical samples pairs
+# chỉ chọn các cặp mẫu không giống nhau
 nonzero = dists != 0
 dists = dists[nonzero]
 
@@ -160,7 +163,27 @@ for n_components in n_components_range:
     plt.title("Histogram of pairwise distance rates for n_components=%d" %
               n_components)
 
-    # TODO: compute the expected value of eps and add them to the previous plot
-    # as vertical lines / region
+    # TODO: tính giá trị mong đợi của eps và thêm chúng vào cốt truyện trước
+
+    # dưới dạng đường / vùng dọc
 
 plt.show()
+
+
+# Chúng ta có thể thấy rằng đối với các giá trị thấp của n_components, phân phối rộng với nhiều cặp
+# bị biến dạng và phân phối bị lệch (do giới hạn cứng của tỷ lệ 0 ở bên trái vì khoảng cách luôn luôn dương)
+# trong khi đối với các giá trị lớn hơn của n_components thì độ méo được kiểm soát và các khoảng cách được bảo
+# quản tốt bởi phép chiếu ngẫu nhiên
+
+# ##############################################################################
+# Nhận xét
+# --------
+
+# Theo bổ đề JL, chiếu 500 mẫu mà không bị biến dạng quá nhiều sẽ cần ít nhất vài nghìn kích thước,
+# bất kể số lượng tính năng của bộ dữ liệu gốc.
+
+# Do đó, việc sử dụng các phép chiếu ngẫu nhiên trên tập dữ liệu chữ số chỉ có 64 tính năng trong
+# không gian đầu vào không có ý nghĩa: nó không cho phép giảm kích thước trong trường hợp này.
+
+# Mặt khác, trong hai mươi nhóm tin tức, chiều có thể giảm từ 56436 xuống còn 10000 trong khi vẫn
+# giữ khoảng cách cặp đôi một cách hợp lý.

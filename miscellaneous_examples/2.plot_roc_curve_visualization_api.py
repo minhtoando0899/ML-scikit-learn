@@ -1,20 +1,22 @@
 '''
-================================
-ROC Curve with Visualization API
-================================
-Scikit-learn defines a simple API for creating visualizations
-for machine learning. The key features of this API is to allow
-for quick plotting and visual adjustments without recalculation.
-In this example, we will demonstrate how to use the visualization
-API by comparing ROC curves.
+====================================
+Đường cong ROB với API trực quan hóa
+====================================
+Scikit-learn định nghĩa 1 API đơn giản để tạo trực quan hóa cho
+machine learning. Các tính năng chính của API này là cho phép điều
+chỉnh phác họa đồ thị và hình ảnh nhanh chóng mà không cần tính toán lại.
+Trong ví dụ này, chúng tôi sẽ trình bày cách sử dụng API trực
+quan hóa bằng cách so sánh các đường cong ROC.
 '''
 print(__doc__)
 
 ###################################################################
-# Load Data and Train a SVC
+# Tải Dữ liệu và huấn luyện 1 SVC
 # -------------------------
-# First, we load the wine dataset and convert it ti a binary classification
-# problem. Then, we train a support vector classifier on a training dataset.
+# Đầu tiên, chúng tôi tải tập dữ liệu wine và chuyển đổi nó thành một bài
+# toán phân loại nhị phân. Sau đó, chúng tôi đào tạo một trình phân loại
+# vector hỗ trợ trên một tập dữ liệu đào tạo.
+
 import matplotlib.pyplot as plt
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
@@ -30,22 +32,23 @@ svc = SVC(random_state=42)
 svc.fit(X_train, y_train)
 
 ###########################################################################
-# Plotting the ROC Curve
+# Phác họa đồ thị đường cong ROC
 # -----------------------
-# Next, we plot the ROC curve with a single call to
-# sklearn.metrics.plot_roc_curve. The returned scv_disp object
-# allows us to continue using the already computed ROC curve for
-# the SVC in futute plots.
+# Tiếp theo, chúng tôi vẽ đường cong ROC bằng một lệnh gọi đến sklearn.metrics.plot_roc_curve.
+# Đối tượng svc_disp được trả về cho phép chúng ta tiếp tục sử dụng đường cong ROC đã được
+# tính toán cho SVC trong các phác đồ tương lai.
+
 scv_disp = plot_roc_curve(svc, X_test, y_test)
 plt.show()
 
 ###################################################################################
-# Training a Random Forest and Plotting the ROC Curve
+# Huấn luyện 1 Random Forest và phác họa đồ thị đường cong ROC
 # ---------------------------------------------------
-# We train a random forest classifier and create a plot comparing it to the SVC ROC
-# curve. Notice how svc_disp uses plot to plot the SVC ROC curve without recomputing
-# the values of the roc curve itself. Furthermore, we pass alpha=0.8 to the plot
-# functions to adjust the alpha values of the curves.
+# Chúng tôi đào tạo một trình phân loại Random Forest và tạo ra một phác họa so sánh
+# nó với đường cong SVC ROC. Lưu ý cách svc_disp sử dụng biểu đồ để phác họa đường cong
+# SVC ROC mà không tính toán lại các giá trị của chính đường cong roc. Hơn nữa, chúng ta
+# chuyển alpha = 0.8 cho các hàm phạc họa để điều chỉnh giá trị alpha của các đường cong.
+
 
 rfc = RandomForestClassifier(n_estimators=10, random_state=42)
 rfc.fit(X_train, y_train)

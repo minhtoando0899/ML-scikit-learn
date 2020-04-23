@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2906193f-fa65-414d-869d-ab0d4b6eab8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Classification/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/1.CompactEstimatorRepresentations.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/1.CompactEstimatorRepresentations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/10.explicit_feature_map_approximation_for_RBF_kernels.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/10.explicit_feature_map_approximation_for_RBF_kernels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/2.plot_roc_curve_visualization_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/2.plot_roc_curve_visualization_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/3.IsotonicRegression.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/3.IsotonicRegression.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/4.AdvancedPlottingWithPartialDependence.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/4.AdvancedPlottingWithPartialDependence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/5.face_completion_with_a_multi-output_estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/5.face_completion_with_a_multi-output_estimators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/6.multilabel_classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/6.multilabel_classification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/7.comparing_anomaly_detection_algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/7.comparing_anomaly_detection_algorithms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/8.the_Johnson_lindenstrauss.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/8.the_Johnson_lindenstrauss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/miscellaneous_examples/9.comparison_of_kernel_ridge_regression_and_SVR.py" beforeDir="false" afterPath="$PROJECT_DIR$/miscellaneous_examples/9.comparison_of_kernel_ridge_regression_and_SVR.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +83,7 @@
         <entry key="$PROJECT_DIR$/miscellaneous_examples" value="master" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/miscellaneous_examples" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="ProjectId" id="1aUzkzmgGIo0gggiChGXD2bonkf" />
@@ -91,8 +100,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
-  <component name="RunManager" selected="Python.5.LinearAndQuadraticDiscriminantAnalysisWithCovarianceEllipsoid">
-    <configuration name="1.a_demo_of_the_spectral_co_clustering_algorithm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.4.AdvancedPlottingWithPartialDependence">
+    <configuration name="1.CompactEstimatorRepresentations" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ML scikit learn" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -100,32 +109,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Biclustering" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/miscellaneous_examples" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\ML scikit learn\Biclustering\1.a_demo_of_the_spectral_co_clustering_algorithm.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="2.a_demo_of_the_spectral_biclustering_algorithm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ML scikit learn" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Biclustering" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\ML scikit learn\Biclustering\2.a_demo_of_the_spectral_biclustering_algorithm.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/miscellaneous_examples/1.CompactEstimatorRepresentations.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -147,6 +135,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="E:\ML scikit learn\Biclustering\3.biclustering_documents_with_the_spectral_co_clustering_algorithm.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="4.AdvancedPlottingWithPartialDependence" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ML scikit learn" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/miscellaneous_examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/miscellaneous_examples/4.AdvancedPlottingWithPartialDependence.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -198,19 +207,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.1.a_demo_of_the_spectral_co_clustering_algorithm" />
-      <item itemvalue="Python.2.a_demo_of_the_spectral_biclustering_algorithm" />
       <item itemvalue="Python.__init__" />
       <item itemvalue="Python.3.biclustering_documents_with_the_spectral_co_clustering_algorithm" />
       <item itemvalue="Python.5.LinearAndQuadraticDiscriminantAnalysisWithCovarianceEllipsoid" />
+      <item itemvalue="Python.1.CompactEstimatorRepresentations" />
+      <item itemvalue="Python.4.AdvancedPlottingWithPartialDependence" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.4.AdvancedPlottingWithPartialDependence" />
+        <item itemvalue="Python.1.CompactEstimatorRepresentations" />
         <item itemvalue="Python.5.LinearAndQuadraticDiscriminantAnalysisWithCovarianceEllipsoid" />
         <item itemvalue="Python.3.biclustering_documents_with_the_spectral_co_clustering_algorithm" />
         <item itemvalue="Python.__init__" />
-        <item itemvalue="Python.2.a_demo_of_the_spectral_biclustering_algorithm" />
-        <item itemvalue="Python.1.a_demo_of_the_spectral_co_clustering_algorithm" />
       </list>
     </recent_temporary>
   </component>
@@ -308,6 +317,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1587131001040" />
+    <state x="361" y="71" key="#Scopes" timestamp="1587659592894">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="71" key="#Scopes/0.0.1536.824@0.0.1536.824" timestamp="1587659592894" />
     <state x="424" y="3" key="CommitChangelistDialog2" timestamp="1587131178509">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -316,38 +329,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="147" y="64" width="1228" height="687" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1587131340455" />
-    <state width="805" height="195" key="GridCell.Tab.0.bottom" timestamp="1587579819647">
+    <state width="1515" height="195" key="GridCell.Tab.0.bottom" timestamp="1587664665325">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="805" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587579819647" />
-    <state width="805" height="195" key="GridCell.Tab.0.center" timestamp="1587579819647">
+    <state width="1515" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587664665325" />
+    <state width="1515" height="195" key="GridCell.Tab.0.center" timestamp="1587664665325">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="805" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587579819647" />
-    <state width="805" height="195" key="GridCell.Tab.0.left" timestamp="1587579819647">
+    <state width="1515" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587664665325" />
+    <state width="1515" height="195" key="GridCell.Tab.0.left" timestamp="1587664665325">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="805" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587579819647" />
-    <state width="805" height="195" key="GridCell.Tab.0.right" timestamp="1587579819647">
+    <state width="1515" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587664665325" />
+    <state width="1515" height="195" key="GridCell.Tab.0.right" timestamp="1587664665325">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="805" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587579819647" />
-    <state width="828" height="258" key="GridCell.Tab.1.bottom" timestamp="1587530041188">
+    <state width="1515" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587664665325" />
+    <state width="828" height="258" key="GridCell.Tab.1.bottom" timestamp="1587579881745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="828" height="258" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587530041188" />
-    <state width="828" height="258" key="GridCell.Tab.1.center" timestamp="1587530041188">
+    <state width="828" height="258" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587579881745" />
+    <state width="828" height="258" key="GridCell.Tab.1.center" timestamp="1587579881745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="828" height="258" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587530041188" />
-    <state width="828" height="258" key="GridCell.Tab.1.left" timestamp="1587530041188">
+    <state width="828" height="258" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587579881745" />
+    <state width="828" height="258" key="GridCell.Tab.1.left" timestamp="1587579881745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="828" height="258" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587530041188" />
-    <state width="828" height="258" key="GridCell.Tab.1.right" timestamp="1587530041188">
+    <state width="828" height="258" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587579881745" />
+    <state width="828" height="258" key="GridCell.Tab.1.right" timestamp="1587579881745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="828" height="258" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587530041188" />
+    <state width="828" height="258" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587579881745" />
     <state x="277" y="55" key="SettingsEditor" timestamp="1586896084873">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -1,78 +1,75 @@
 """
-==================================================
-Explicit feature map approximation for RBF kernels
-==================================================
+===================================================
+Tính gần đúng bản đồ tính toán cho các hạt nhân RBF
+===================================================
 """
 
-# An example illustrating the approximation of the feature map of an RBF kernel.
-
-# It shows how to use RBFSampler and Nystroem to approximate the feature map of an
-# RBF kernel for classification with an SVM on the digits dataset. Results using a
-# linear SVM in the original space, a linear SVM using the approximate mappings and
-# using a kernelized SVM are compared. Timings and accuracy for varying amounts of
-# Monte Carlo samplings (in the case of RBFSampler, which uses random Fourier features)
-# and different sized subsets of the training set (for Nystroem) for the approximate
-# mapping are shown.
-
-# Please note that the dataset here is not large enough to show the benefits of kernel
-# approximation, as the exact SVM is still reasonably fast.
-
-# Sampling more dimensions clearly leads to better classification results, but comes
-# at a greater cost. This means there is a tradeoff between runtime and accuracy,
-# given by the parameter n_components. Note that solving the Linear SVM and also the
-# approximate kernel SVM could be greatly accelerated by using stochastic gradient
-# descent via sklearn.linear_model.SGDClassifier. This is not easily possible for
-# the case of the kernelized SVM.
+# Một ví dụ minh họa sự gần đúng của bản đồ tính năng của hạt nhân RBF.
+#
+# Nó cho thấy cách sử dụng RBFSampler và Nystroem để xấp xỉ bản đồ tính năng của hạt nhân
+# RBF để phân loại với một SVM trên tập dữ liệu chữ số. Kết quả sử dụng một SVM tuyến tính
+# trong không gian ban đầu, một SVM tuyến tính sử dụng ánh xạ gần đúng và sử dụng một SVM
+# được nhân được so sánh. Thời gian và độ chính xác cho các mức lấy mẫu Monte Carlo khác
+# nhau (trong trường hợp RBFSampler, sử dụng các tính năng Fourier ngẫu nhiên) và các tập
+# hợp con có kích thước khác nhau của tập huấn luyện (đối với Nystroem) cho ánh xạ gần đúng
+# được hiển thị.
+#
+# Xin lưu ý rằng bộ dữ liệu ở đây không đủ lớn để hiển thị các lợi ích của xấp xỉ kernel,
+# vì SVM chính xác vẫn còn khá nhanh.
+#
+# Lấy mẫu nhiều kích thước rõ ràng dẫn đến kết quả phân loại tốt hơn, nhưng có chi phí
+# lớn hơn. Điều này có nghĩa là có sự đánh đổi giữa thời gian chạy và độ chính xác, được
+# đưa ra bởi tham số n_components. Lưu ý rằng việc giải quyết SVM tuyến tính và cả SVM
+# hạt nhân gần đúng có thể được tăng tốc đáng kể bằng cách sử dụng độ dốc dốc ngẫu nhiên
+# thông qua sklearn.linear_model.SGDClassifier. Điều này là không dễ dàng đối với trường
+# hợp của SVM được nhân.
 
 # ##################################################################################
-# Python package and dataset imports, load dataset
+# Nhập gói và dữ liệu Python, tải dữ liệu
 # ------------------------------------------------
 
-# Author: Gael Varoquaux <gael dot varoquaux at normalesup dot org>
-#         Andreas Mueller <amueller@ais.uni-bonn.de>
-# License: BSD 3 clause
 print(__doc__)
 
-# standard scientific Python imports
+# Nhập Python khoa học tiêu chuẩn
 import matplotlib.pyplot as plt
 import numpy as np
 from time import time
 
-# Import datasets, classifiers and performance metrics
+# Nhập bộ dữ liệu, phân loại và số liệu hiệu suất
 from sklearn import datasets, svm, pipeline
 from sklearn.kernel_approximation import (RBFSampler,
                                           Nystroem)
 from sklearn.decomposition import PCA
 
-# The digits dataset
+# Tập dữ liệu chữ số
 digits = datasets.load_digits(n_class=9)
 
 # ###################################################################################
-# Timing and accuracy plots
+# Phác đồ thời gian và độ chính xác
 # -------------------------
 
-# To apply an classifier on this data, we need to flatten the image, to turn the data
-# in a (samples, feature) matrix:
+# Để áp dụng trình phân loại trên dữ liệu này, chúng ta cần làm phẳng hình ảnh, để biến
+# dữ liệu theo ma trận (mẫu, tính năng):
 
 n_samples = len(digits.data)
 data = digits.data / 16.
 data -= data.mean(axis=0)
 
-# We learn the digits on the first half of the digits
+# Chúng tôi tìm hiểu các chữ số ở nửa đầu của các chữ số
 data_train, targets_train = (data[:n_samples // 2],
                              digits.target[:n_samples // 2])
 
-# Now predict the value of the digit on the second half:
+# Bây giờ dự đoán giá trị của chữ số trên nửa thứ hai:
 data_test, targets_test = (data[n_samples // 2:],
                            digits.target[n_samples // 2:])
 # data_test = scaler.transform(data_test)
 
-# Create a classifier: a support vector classifier
+# Tạo trình phân loại: trình phân loại vectơ hỗ trợ
 kernel_svm = svm.SVC(gamma=.2)
 linear_svm = svm.LinearSVC()
 
-# create pipeline from kernel approximation
-# ang linear svm
+# tạo đường ống từ xấp xỉ kernel
+# và Svm tuyến tính
 feature_map_fourier = RBFSampler(gamma=.2, random_state=1)
 feature_map_nystroem = Nystroem(gamma=.2, random_state=1)
 fourier_approx_svm = pipeline.Pipeline([("feature_map", feature_map_fourier),
@@ -80,7 +77,7 @@ fourier_approx_svm = pipeline.Pipeline([("feature_map", feature_map_fourier),
 nystroem_approx_svm = pipeline.Pipeline([("feature_map", feature_map_nystroem),
                                          ("svm", svm.LinearSVC())])
 
-# fit and predic using linear and kernel svm:
+# phù hợp và dự đoán bằng cách sử dụng svm tuyến tính và kernel:
 
 kernel_svm_time = time()
 kernel_svm.fit(data_train, targets_train)
@@ -114,10 +111,10 @@ for D in sample_sizes:
     nystroem_scores.append(nystroem_score)
     fourier_scores.append(fourier_score)
 
-# plot the result:
+# vẽ kết quả:
 plt.figure(figsize=(16, 4))
 accuracy = plt.subplot(121)
-# second y axis for timings
+# Trục thứ hai y cho thời gian
 timescale = plt.subplot(122)
 
 accuracy.plot(sample_sizes, nystroem_scores, label="Nystroem approx. kernel")
@@ -128,7 +125,7 @@ accuracy.plot(sample_sizes, fourier_scores, label='Fourier approxy. kernel')
 timescale.plot(sample_sizes, fourier_times, '--',
                label='Fourier approxy.kernel')
 
-# horizontal lines for exact rbf and linear kernels:
+# đường ngang cho hạt nhân rbf và tuyến tính chính xác:
 accuracy.plot([sample_sizes[0], sample_sizes[-1]],
               [linear_svm_score, linear_svm_score], label="linear svm")
 timescale.plot([sample_sizes[0], sample_sizes[-1]],
@@ -139,7 +136,7 @@ accuracy.plot([sample_sizes[0], sample_sizes[-1]],
 timescale.plot([sample_sizes[0], sample_sizes[-1]],
                [kernel_svm_time, kernel_svm_time], '--', label='rbf svm')
 
-# vertical line for dataset dimensionality = 64
+# đường thẳng đứng cho tập dữ liệu thứ nguyên = 64
 accuracy.plot([64, 64], [0.7, 1], label="n_features")
 
 # legends and labels
@@ -157,35 +154,35 @@ plt.tight_layout()
 plt.show()
 
 # ###################################################################################
-# Decision Surfaces of RBF Kernel SVM and Linear SVM
+# Bề mặt quyết định của RBF Kernel SVM và tuyến tính SVM
 # --------------------------------------------------
 
-# The second plot visualized the decision surfaces of the RBF kernel SVM and the linear
-# SVM with approximate kernel maps. The plot shows decision surfaces of the classifiers
-# projected onto the first two principal components of the data. This visualization
-# should be taken with a grain of salt since it is just an interesting slice through
-# the decision surface in 64 dimensions. In particular note that a datapoint (represented as a dot)
-# does not necessarily be classified into the region it is lying in, since it will not
-# lie on the plane that the first two principal components span. The usage of RBFSampler
-# and Nystroem is described in detail in Kernel Approximation.
+# Biểu đồ thứ hai trực quan hóa các bề mặt quyết định của hạt nhân RBF SVM và SVM tuyến tính
+# với các bản đồ hạt nhân gần đúng. Biểu đồ cho thấy các bề mặt quyết định của các phân loại
+# được chiếu lên hai thành phần chính đầu tiên của dữ liệu. Hình dung này nên được thực hiện
+# với một hạt muối vì nó chỉ là một lát cắt thú vị thông qua bề mặt quyết định trong 64 chiều.
+# Đặc biệt lưu ý rằng một datapoint (được biểu thị dưới dạng một dấu chấm) không nhất thiết
+# phải được phân loại vào khu vực mà nó nằm, vì nó sẽ không nằm trên mặt phẳng mà hai thành
+# phần chính đầu tiên trải dài. Việc sử dụng RBFSampler và Nystroem được mô tả chi tiết trong
+# xấp xỉ hạt nhân.
 
-# visualize the decision surface, projected down to the first
-# two principal components of the dataset
+# trực quan hóa bề mặt quyết định, chiếu xuống đầu tiên
+# hai thành phần chính của bộ dữ liệu
 pca = PCA(n_components=8).fit(data_train)
 
 X = pca.transform(data_train)
 
-# Generate grid along first two principal components
+# Tạo lưới dọc theo hai thành phần chính đầu tiên
 multiples = np.arange(-2, 2, 0.1)
-# step along first component
+# bước dọc theo thành phần đầu tiên
 first = multiples[:, np.newaxis] * pca.components_[0, :]
 # steps along second component
 second = multiples[:, np.newaxis] * pca.components_[1, :]
-# combine
+# phối hợp
 grid = first[np.newaxis, :, :] + second[:, np.newaxis, :]
 flat_grid = grid.reshape(-1, data.shape[1])
 
-# title for the plots
+# tiêu đề cho các lô
 titles = ['SVC with rbf kernel',
          'SVC (linear kernel)\n with Fourier rbf feature map\n'
          'n_components=100',
@@ -194,20 +191,20 @@ titles = ['SVC with rbf kernel',
 
 plt.figure(figsize=(18, 7.5))
 plt.rcParams.update({'font.size': 14})
-# predict and plot
+# dự đoán và cốt truyện
 for i, clf in enumerate((kernel_svm, nystroem_approx_svm,
                          fourier_approx_svm)):
-    # Plot the decision boundary. For that, we will assign a color to each
-    # point in the mesh [x_min, x_max]x[y_min, y_max].
+    # Vẽ ranh giới quyết định. Vì vậy, chúng tôi sẽ chỉ định một màu cho mỗi
+    # điểm trong danh sách [x_min, x_max]x[y_min, y_max].
     plt.subplot(1, 3, i + 1)
     Z = clf.predict(flat_grid)
 
-    # Put the result into a color plot
+    # Đặt kết quả vào một ô màu
     Z = Z.reshape(grid.shape[:-1])
     plt.contourf(multiples, multiples, Z, cmap=plt.cm.Paired)
     plt.axis('off')
 
-    # Plot also the training points
+    # Âm mưu cũng là điểm đào tạo
     plt.scatter(X[:, 0], X[:, 1], c=targets_train, cmap=plt.cm.Paired,
                 edgecolors=(0, 0, 0))
     plt.title(titles[i])

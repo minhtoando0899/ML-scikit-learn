@@ -1,14 +1,15 @@
 """
-==============================================
-Face completion with a multi-output estimators
-==============================================
-This example shows the use of multi-output estimator to
-complete images. The goal is to predict the lower half
-of a face given its upper half.
-The first column of images shows true faces. The next
-columns illustrate how extremely randomized trees,
-k nearest neighbors, linear regression and ridge
-regression complete the lower half of those faces.
+===================================================
+Hoàn thành khuôn mặt với công cụ ước tính đa đầu ra
+===================================================
+Ví dụ này cho thấy việc sử dụng công cụ ước tính đa đầu ra
+để hoàn thành hình ảnh. Mục tiêu là dự đoán nửa dưới của
+khuôn mặt với nửa trên của nó.
+
+Cột đầu tiên của hình ảnh cho thấy khuôn mặt thật. Các cột
+tiếp theo minh họa cách extremely randomized trees, k
+nearest neighbors, hồi quy tuyến tính và hồi quy sườn
+hoàn thành nửa dưới của các mặt đó.
 """
 
 print(__doc__)
@@ -24,27 +25,27 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import RidgeCV
 
-# Loadthe faces datasets
+# Tải bộ dữ liệu khuôn mặt
 data, targets = fetch_olivetti_faces(return_X_y=True)
 
 train = data[targets < 30]
-test = data[targets >= 30]  # Test on independent people
+test = data[targets >= 30]  # Thử nghiệm trên những người độc lập
 
-# test on a subset of people
+# Thử nghiệm trên một tập hợp con người
 n_faces = 5
 rng = check_random_state(4)
 face_ids = rng.randint(test.shape[0], size=(n_faces,))
 test = test[face_ids, :]
 
 n_pixels = data.shape[1]
-# Upper half of the faces
+# Nửa trên của khuôn mặt
 X_train = train[:, :(n_pixels + 1) // 2]
-# Lower half of the faces
+# Nửa dưới của khuôn mặt
 y_train = train[:, n_pixels // 2:]
 X_test = test[:, :(n_pixels + 1) // 2]
 y_test = test[:, n_pixels // 2:]
 
-# Fix estimators
+# Ước tính phù hợp
 ESTIMATORS = {
     "Extra trees": ExtraTreesRegressor(n_estimators=10, max_features=32,
                                        random_state=0),
@@ -58,7 +59,7 @@ for name, estimator in ESTIMATORS.items():
     estimator.fit(X_train, y_train)
     y_test_predict[name] = estimator.predict(X_test)
 
-# Plot the completed faces
+# Vẽ các mặt đã hoàn thành
 image_shape = (64, 64)
 
 n_cols = 1 + len(ESTIMATORS)

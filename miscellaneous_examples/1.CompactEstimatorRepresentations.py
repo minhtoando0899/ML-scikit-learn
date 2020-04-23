@@ -1,7 +1,17 @@
+"""
+=================================
+Biểu diễn ước lượng vắn tắt
+=================================
+Ví dụ này minh họa việc sử dụng tham số toàn cầu the print_changed_only
+Đặt print_changed_only thành True sẽ thay thế biểu diễn của các công cụ ước
+tính để chỉ hiển thị các tham số đã được đặt thành giá trị không mặc định.
+Điều này có thể được sử dụng để có đại diện vắn tắt hơn.
+"""
 print(__doc__)
 
 from sklearn.linear_model import LogisticRegression
 from sklearn import set_config
+
 
 lr = LogisticRegression(penalty='l1')
 print('Default representation:')

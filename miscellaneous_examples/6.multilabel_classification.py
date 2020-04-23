@@ -1,30 +1,34 @@
 """
-=========================
-Multilabel classification
-=========================
-This example simulates a multi-label document classification problem.
-The dataset is generated randomly based on the following process:
+=================
+Phân loại đa nhãn
+=================
+Ví dụ này mô phỏng một bài toán phân loại tài liệu đa nhãn.
+Bộ dữ liệu được tạo ngẫu nhiên dựa trên quy trình sau:
 
-pick the number of labels: n ~ Poisson(n_labels)
+chọn số lượng nhãn: n ~ Poisson (n_labels)
 
-n times, choose a class c: c ~ Multinomial(theta)
+n lần, chọn một lớp c: c ~ Multinomial (theta)
 
-pick the document length: k ~ Poisson(length)
+chọn độ dài tài liệu: k ~ Poisson (length)
 
-k times, choose a word: w ~ Multinomial(theta_c)
-
-In the above process, rejection sampling is used to make sure that
-n is more than 2, and that the document length is never zero. Likewise,
-we reject classes which have already been chosen. The documents that
-are assigned to both classes are plotted surrounded by two colored circles.
+k lần, chọn một từ: w ~ Multinomial (theta_c)
 
 """
-# The classification is performed by projecting to the first two principal
-# components found by PCA and CCA for visualisation purposes, followed by
-# using the sklearn.multiclass.OneVsRestClassifier metaclassifier using
-# two SVCs with linear kernels to learn a discriminative model for each class.
-#  Note that PCA is used to perform an unsupervised dimensionality reduction,
-#   while CCA is used to perform a supervised one.
+# Trong quy trình trên, lấy mẫu từ chối được sử dụng để đảm bảo rằng
+# n lớn hơn 2 và độ dài tài liệu không bao giờ bằng không. Tương tự
+# như vậy, chúng tôi từ chối các lớp đã được chọn. Các tài liệu được
+# gán cho cả hai lớp được vẽ bao quanh bởi hai vòng tròn màu.
+#
+# Việc phân loại được thực hiện bằng cách chiếu đến hai thành phần chính
+# đầu tiên được PCA và CCA tìm thấy cho mục đích trực quan hóa, tiếp theo
+# là sử dụng siêu dữ liệu sklearn.multiclass.OneVsRestClassifier sử dụng
+# hai SVC với hạt nhân tuyến tính để tìm hiểu mô hình phân biệt đối xử
+# cho mỗi lớp. Lưu ý rằng PCA được sử dụng để thực hiện giảm kích thước
+# không giám sát, trong khi CCA được sử dụng để thực hiện giám sát.
+#
+# Lưu ý: trong cốt truyện, các mẫu không gắn nhãn, không có nghĩa là
+# chúng tôi không biết nhãn (như trong học tập bán giám sát) nhưng
+# các mẫu đơn giản là không có nhãn.
 print(__doc__)
 
 import numpy as np
@@ -38,10 +42,10 @@ from sklearn.cross_decomposition import CCA
 
 
 def plot_hyperplane(clf, min_x, max_x, linestyle, label):
-    # get the separating hyperplane
+    # lấy siêu phẳng tách ra
     w = clf.coef_[0]
     a = -w[0] / w[1]
-    xx = np.linspace(min_x - 5, max_x + 5)  # make sure the line is long enough
+    xx = np.linspace(min_x - 5, max_x + 5)  # đảm bảo dòng này đủ dài
     yy = a * xx - (clf.intercept_[0] / w[1])
     plt.plot(xx, yy, linestyle, label=label)
 
