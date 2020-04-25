@@ -8,7 +8,7 @@
 # posts containing nothing but data.
 
 # The TF-IDF vectorized posts form a word frequency matrix, which is then biclustered
-# using Dhillon’s Spectral Co-Clustering algorithm. The resulting document-word biclusters
+# using Dhillon’s Spectral Co-5.Clustering algorithm. The resulting document-word biclusters
 # indicate subsets words used more often in those subsets documents.
 
 # For a few of the best biclusters, its most common document categories and its ten most
