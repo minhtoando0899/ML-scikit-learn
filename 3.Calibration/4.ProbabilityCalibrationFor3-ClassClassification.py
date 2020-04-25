@@ -1,6 +1,6 @@
 """
 ==================================================
-Probability Calibration for 3-class classification
+Probability 3.Calibration for 3-class classification
 ==================================================
 """
 

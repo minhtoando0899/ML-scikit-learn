@@ -42,7 +42,7 @@ ax2 = plt.subplot2grid((3, 1), (2, 0))
 ax1.plot([0, 1], [0, 1], "k:", label="Perfectly calibrated")
 for clf, name in [(lr, 'Logistic'),
                   (gnb, 'Naive Bayes'),
-                  (svc, 'Support Vector Classification'),
+                  (svc, 'Support Vector 4.Classification'),
                   (rfc, 'Random Forest')]:
     clf.fit(X_train, y_train)
     if hasattr(clf, "predict_proba"):
@@ -63,7 +63,7 @@ for clf, name in [(lr, 'Logistic'),
 ax1.set_ylabel("Fraction of positives")
 ax1.set_ylim([-0.05, 1.05])
 ax1.legend(loc="lower right")
-ax1.set_title('Calibration plots  (reliability curve)')
+ax1.set_title('3.Calibration plots  (reliability curve)')
 
 ax2.set_xlabel("Mean predicted value")
 ax2.set_ylabel("Count")

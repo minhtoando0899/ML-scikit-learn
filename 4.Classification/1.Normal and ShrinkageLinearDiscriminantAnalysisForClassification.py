@@ -62,7 +62,7 @@ plt.plot(features_samples_ratio, acc_clf2, linewidth=2,
          label="Linear Discriminant Analysis", color='gold')
 
 plt.xlabel('n_features / n_samples')
-plt.ylabel('Classification accuracy')
+plt.ylabel('4.Classification accuracy')
 
 plt.legend(loc=1, prop={'size': 12})
 plt.suptitle('Linear Discriminant Analysis vs. \

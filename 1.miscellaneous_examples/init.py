@@ -113,13 +113,13 @@ timescale.plot([sample_sizes[0], sample_sizes[-1]],
 accuracy.plot([64, 64], [0.7, 1], label="n_features")
 
 # legends and labels
-accuracy.set_title("Classification accuracy")
+accuracy.set_title("4.Classification accuracy")
 timescale.set_title("Training times")
 accuracy.set_xlim(sample_sizes[0], sample_sizes[-1])
 accuracy.set_xticks(())
 accuracy.set_ylim(np.min(fourier_scores), 1)
 timescale.set_xlabel("Sampling steps = transformed feature dimension")
-accuracy.set_ylabel("Classification accuracy")
+accuracy.set_ylabel("4.Classification accuracy")
 timescale.set_ylabel("Training time in seconds")
 accuracy.legend(loc='best')
 timescale.legend(loc='best')

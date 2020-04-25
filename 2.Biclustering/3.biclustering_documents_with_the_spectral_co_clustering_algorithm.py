@@ -1,6 +1,6 @@
 """
 ================================================================
-Biclustering documents with the Spectral Co-clustering algorithm
+2.Biclustering documents with the Spectral Co-clustering algorithm
 ================================================================
 """
 # This example demonstrates the Spectral Co-clustering algorithm on the twenty newsgroups

@@ -1,6 +1,6 @@
 """
 ==============================
-Probability Calibration curves
+Probability 3.Calibration curves
 ==============================
 """
 # When performing classification one often wants to predict not only the class label,
@@ -19,7 +19,7 @@ Probability Calibration curves
 # features which violate the assumption of feature-independence and result in an overly
 # confident classifier, which is indicated by the typical transposed-sigmoid curve.
 
-# Calibration of the probabilities of Gaussian naive Bayes with isotonic regression
+# 3.Calibration of the probabilities of Gaussian naive Bayes with isotonic regression
 # can fix this issue as can be seen from the nearly diagonal calibration curve.
 # Sigmoid calibration also improves the brier score slightly, albeit not as strongly as
 # the non-parametric isotonic regression. This can be attributed to the fact that we
@@ -67,7 +67,7 @@ def plot_calibration_curve(est, name, fig_index):
     # Calibrated with isotonic calibration
     isotonic = CalibratedClassifierCV(est, cv=2, method='isotonic')
 
-    # Calibration with sigmoid calibration
+    # 3.Calibration with sigmoid calibration
     sigmoid = CalibratedClassifierCV(est, cv=2, method='sigmoid')
 
     # Logistic regression with no calibration as baseline
@@ -110,7 +110,7 @@ def plot_calibration_curve(est, name, fig_index):
     ax1.set_ylabel("Fraction of positives")
     ax1.set_ylim([-0.05, 1.05])
     ax1.legend(loc="lower right")
-    ax1.set_title("Calibration plots (reliability curve)")
+    ax1.set_title("3.Calibration plots (reliability curve)")
 
     ax2.set_xlabel("Mean predicted value")
     ax2.set_ylabel("Count")
