@@ -1,54 +1,68 @@
-import time
-import matplotlib.pyplot as plt
+print(__doc__)
+from time import time
+
 import numpy as np
+from scipy import ndimage
+from matplotlib import pyplot as plt
+
+from sklearn import manifold, datasets
+
+X, y = datasets.load_digits(return_X_y=True)
+n_samples, n_features = X.shape
+
+np.random.seed(0)
+
+def nudge_images(X, y):
+    # Having a larger dataset shows more clearly the behavior of the
+    # methods, but we multiply the size of the dataset only by 2, as the
+    # cost of the hierarchical clustering methods are strongly
+    # super-linear in n_samples
+    shift = lambda x: ndimage.shift(x.reshape((8, 8)),
+                                  .3 * np.random.normal(size=2),
+                                  mode='constant',
+                                  ).ravel()
+    X = np.concatenate([X, np.apply_along_axis(shift, 1, X)])
+    Y = np.concatenate([y, y], axis=0)
+    return X, Y
+
+
+X, y = nudge_images(X, y)
+
+
+#----------------------------------------------------------------------
+# Visualize the clustering
+def plot_clustering(X_red, labels, title=None):
+    x_min, x_max = np.min(X_red, axis=0), np.max(X_red, axis=0)
+    X_red = (X_red - x_min) / (x_max - x_min)
+
+    plt.figure(figsize=(6, 4))
+    for i in range(X_red.shape[0]):
+        plt.text(X_red[i, 0], X_red[i, 1], str(y[i]),
+                 color=plt.cm.nipy_spectral(labels[i] / 10.),
+                 fontdict={'weight': 'bold', 'size': 9})
+
+    plt.xticks([])
+    plt.yticks([])
+    if title is not None:
+        plt.title(title, size=17)
+    plt.axis('off')
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+
+#----------------------------------------------------------------------
+# 2D embedding of the digits dataset
+print("Computing embedding")
+X_red = manifold.SpectralEmbedding(n_components=2).fit_transform(X)
+print("Done.")
 
 from sklearn.cluster import AgglomerativeClustering
-from sklearn.neighbors import kneighbors_graph
 
-# Generate sample data
-n_samples = 1500
-np.random.seed(0)
-t = 1.5 * np.pi * (1 + 3 * np.random.rand(1, n_samples))
-x = t * np.cos(t)
-y = t * np.sin(t)
+for linkage in ('ward', 'average', 'complete', 'single'):
+    clustering = AgglomerativeClustering(linkage=linkage, n_clusters=10)
+    t0 = time()
+    clustering.fit(X_red)
+    print("%s :\t%.2fs" % (linkage, time() - t0))
 
-
-X = np.concatenate((x, y))
-X += .7 * np.random.randn(2, n_samples)
-X = X.T
-
-# Create a graph capturing local connectivity. Larger number of neighbors
-# will give more homogeneous clusters to the cost of computation
-# time. A very large number of neighbors gives more evenly distributed
-# cluster sizes, but may not impose the local manifold structure of
-# the data
-knn_graph = kneighbors_graph(X, 30, include_self=False)
-
-for connectivity in (None, knn_graph):
-    for n_clusters in (30, 3):
-        plt.figure(figsize=(10, 4))
-        for index, linkage in enumerate(('average',
-                                         'complete',
-                                         'ward',
-                                         'single')):
-            plt.subplot(1, 4, index + 1)
-            model = AgglomerativeClustering(linkage=linkage,
-                                            connectivity=connectivity,
-                                            n_clusters=n_clusters)
-            t0 = time.time()
-            model.fit(X)
-            elapsed_time = time.time() - t0
-            plt.scatter(X[:, 0], X[:, 1], c=model.labels_,
-                        cmap=plt.cm.nipy_spectral)
-            plt.title('linkage=%s\n(time %.2fs)' % (linkage, elapsed_time),
-                      fontdict=dict(verticalalignment='top'))
-            plt.axis('equal')
-            plt.axis('off')
-
-            plt.subplots_adjust(bottom=0, top=.89, wspace=0,
-                                left=0, right=1)
-            plt.suptitle('n_cluster=%i, connectivity=%r' %
-                         (n_clusters, connectivity is not None), size=17)
+    plot_clustering(X_red, clustering.labels_, "%s linkage" % linkage)
 
 
 plt.show()
