@@ -1,68 +1,75 @@
 print(__doc__)
-from time import time
+
+# Authors:  Emmanuelle Gouillart <emmanuelle.gouillart@normalesup.org>
+#           Gael Varoquaux <gael.varoquaux@normalesup.org>
+# License: BSD 3 clause
 
 import numpy as np
-from scipy import ndimage
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
-from sklearn import manifold, datasets
+from sklearn.feature_extraction import image
+from sklearn.cluster import spectral_clustering
 
-X, y = datasets.load_digits(return_X_y=True)
-n_samples, n_features = X.shape
+l = 100
+x, y = np.indices((l, l))
 
-np.random.seed(0)
+center1 = (28, 24)
+center2 = (40, 50)
+center3 = (67, 58)
+center4 = (24, 70)
 
-def nudge_images(X, y):
-    # Having a larger dataset shows more clearly the behavior of the
-    # methods, but we multiply the size of the dataset only by 2, as the
-    # cost of the hierarchical clustering methods are strongly
-    # super-linear in n_samples
-    shift = lambda x: ndimage.shift(x.reshape((8, 8)),
-                                  .3 * np.random.normal(size=2),
-                                  mode='constant',
-                                  ).ravel()
-    X = np.concatenate([X, np.apply_along_axis(shift, 1, X)])
-    Y = np.concatenate([y, y], axis=0)
-    return X, Y
+radius1, radius2, radius3, radius4 = 16, 14, 15, 14
 
+circle1 = (x - center1[0]) ** 2 + (y - center1[1]) ** 2 < radius1 ** 2
+circle2 = (x - center2[0]) ** 2 + (y - center2[1]) ** 2 < radius2 ** 2
+circle3 = (x - center3[0]) ** 2 + (y - center3[1]) ** 2 < radius3 ** 2
+circle4 = (x - center4[0]) ** 2 + (y - center4[1]) ** 2 < radius4 ** 2
 
-X, y = nudge_images(X, y)
+# #############################################################################
+# 4 circles
+img = circle1 + circle2 + circle3 + circle4
 
+# We use a mask that limits to the foreground: the problem that we are
+# interested in here is not separating the objects from the background,
+# but separating them one from the other.
+mask = img.astype(bool)
 
-#----------------------------------------------------------------------
-# Visualize the clustering
-def plot_clustering(X_red, labels, title=None):
-    x_min, x_max = np.min(X_red, axis=0), np.max(X_red, axis=0)
-    X_red = (X_red - x_min) / (x_max - x_min)
+img = img.astype(float)
+img += 1 + 0.2 * np.random.randn(*img.shape)
 
-    plt.figure(figsize=(6, 4))
-    for i in range(X_red.shape[0]):
-        plt.text(X_red[i, 0], X_red[i, 1], str(y[i]),
-                 color=plt.cm.nipy_spectral(labels[i] / 10.),
-                 fontdict={'weight': 'bold', 'size': 9})
+# Convert the image into a graph with the value of the gradient on the
+# edges.
+graph = image.img_to_graph(img, mask=mask)
 
-    plt.xticks([])
-    plt.yticks([])
-    if title is not None:
-        plt.title(title, size=17)
-    plt.axis('off')
-    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+# Take a decreasing function of the gradient: we take it weakly
+# dependent from the gradient the segmentation is close to a voronoi
+graph.data = np.exp(-graph.data / graph.data.std())
 
-#----------------------------------------------------------------------
-# 2D embedding of the digits dataset
-print("Computing embedding")
-X_red = manifold.SpectralEmbedding(n_components=2).fit_transform(X)
-print("Done.")
+# Force the solver to be arpack, since amg is numerically
+# unstable on this example
+labels = spectral_clustering(graph, n_clusters=4, eigen_solver='arpack')
+label_im = np.full(mask.shape, -1.)
+label_im[mask] = labels
 
-from sklearn.cluster import AgglomerativeClustering
+plt.matshow(img)
+plt.matshow(label_im)
 
-for linkage in ('ward', 'average', 'complete', 'single'):
-    clustering = AgglomerativeClustering(linkage=linkage, n_clusters=10)
-    t0 = time()
-    clustering.fit(X_red)
-    print("%s :\t%.2fs" % (linkage, time() - t0))
+# #############################################################################
+# 2 circles
+img = circle1 + circle2
+mask = img.astype(bool)
+img = img.astype(float)
 
-    plot_clustering(X_red, clustering.labels_, "%s linkage" % linkage)
+img += 1 + 0.2 * np.random.randn(*img.shape)
 
+graph = image.img_to_graph(img, mask=mask)
+graph.data = np.exp(-graph.data / graph.data.std())
+
+labels = spectral_clustering(graph, n_clusters=2, eigen_solver='arpack')
+label_im = np.full(mask.shape, -1.)
+label_im[mask] = labels
+
+plt.matshow(img)
+plt.matshow(label_im)
 
 plt.show()
