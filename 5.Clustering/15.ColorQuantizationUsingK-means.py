@@ -1,3 +1,20 @@
+"""
+Color Quantization using K-Means
+(định lượng màu sử dụng K-Means)
+"""
+# Thực hiện lượng tử hóa Vector (VQ) pixel-wise của hình ảnh cung điện mùa hè
+# (Trung Quốc), giảm số màu sắc cần thiết để hiển thị hình ảnh tử 96,615 xuống
+# còn 64, trong khi vẫn giữ được chất lượng ảnh.
+
+# Trong ví dụ này, các pixel được biểu diễn trong không gian 3D và K-Means
+# được sử dụng để tìm 64 cụm màu. Trong tài liệu xử lý ảnh, bảng mã thu được
+# từ K-mean (trung tâm cụm) được gọi là bảng màu. Sử dụng một byte đơn, có thể
+# xử lý tối đa 256 màu, trong khi mã hóa RGB yêu cầu 3 byte cho mỗi pixel. Định
+# dạng tệp GIF, ví dụ, sử dụng bảng màu như vậy.
+
+# Để so sánh, một hình ảnh được lượng tử hóa bằng cách sử dụng một cuốn sách mã
+# ngẫu nhiên (màu sắc được chọn ngẫu nhiên) cũng được hiển thị.
+
 print(__doc__)
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,15 +26,15 @@ from time import time
 
 n_colors = 64
 
-# Load the Summer Palace photo
+# tải ảnh cung điện mùa hè
 china = load_sample_image("china.jpg")
 
-# Convert to floats instead of the default 8 bits integer coding. Dividing by
-# 255 is important so that plt.imshow behaves works well on float data (need to
-# be in the range [0-1])
-china = np.array(china, dtype=np.float64) / 255
+# chuyển đổi thành các số thực thay vì mã hóa 8 bit mặc định.
+# Chia cho 255 là rất quan trọng để plt.imshow hoạt động tốt
+# trên dữ liệu nổi( cần phải nằm trong phạm vi [0-1])
+china = np.array(china, dtype=np.float64) / 225
 
-# Load Image and transform to a 2D numpy array.
+# Tải ảnh và chuyển đổi thành 1 mảng numpy 2D
 w, h, d = original_shape = tuple(china.shape)
 assert d == 3
 image_array = np.reshape(china, (w * h, d))
@@ -28,12 +45,11 @@ image_array_sample = shuffle(image_array, random_state=0)[:1000]
 kmeans = KMeans(n_clusters=n_colors, random_state=0).fit(image_array_sample)
 print("done in %0.3fs." % (time() - t0))
 
-# Get labels for all points
+# lấy các nhãn cho tất cả các điểm
 print("Predicting color indices on the full image (k-means)")
 t0 = time()
 labels = kmeans.predict(image_array)
 print("done in %0.3fs." % (time() - t0))
-
 
 codebook_random = shuffle(image_array, random_state=0)[:n_colors]
 print("Predicting color indices on the full image (random)")
@@ -55,7 +71,8 @@ def recreate_image(codebook, labels, w, h):
             label_idx += 1
     return image
 
-# Display all results, alongside original image
+
+# Hiển thị các kết quả, cung với hình ảnh gốc.
 plt.figure(1)
 plt.clf()
 plt.axis('off')
