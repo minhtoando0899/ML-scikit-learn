@@ -1,76 +1,67 @@
 print(__doc__)
+
+import time as time
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn.metrics import pairwise_distances_argmin
-from sklearn.datasets import load_sample_image
-from sklearn.utils import shuffle
-from time import time
+import mpl_toolkits.mplot3d.axes3d as p3
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.datasets import make_swiss_roll
 
-n_colors = 64
+# #############################################################################
+# Generate data (swiss roll dataset)
+n_samples = 1500
+noise = 0.05
+X, _ = make_swiss_roll(n_samples, noise)
+# Make it thinner
+X[:, 1] *= .5
 
-# Load the Summer Palace photo
-china = load_sample_image("china.jpg")
+# #############################################################################
+# Compute clustering
+print("Compute unstructured hierarchical clustering...")
+st = time.time()
+ward = AgglomerativeClustering(n_clusters=6, linkage='ward').fit(X)
+elapsed_time = time.time() - st
+label = ward.labels_
+print("Elapsed time: %.2fs" % elapsed_time)
+print("Number of points: %i" % label.size)
 
-# Convert to floats instead of the default 8 bits integer coding. Dividing by
-# 255 is important so that plt.imshow behaves works well on float data (need to
-# be in the range [0-1])
-china = np.array(china, dtype=np.float64) / 255
-
-# Load Image and transform to a 2D numpy array.
-w, h, d = original_shape = tuple(china.shape)
-assert d == 3
-image_array = np.reshape(china, (w * h, d))
-
-print("Fitting model on a small sub-sample of the data")
-t0 = time()
-image_array_sample = shuffle(image_array, random_state=0)[:1000]
-kmeans = KMeans(n_clusters=n_colors, random_state=0).fit(image_array_sample)
-print("done in %0.3fs." % (time() - t0))
-
-# Get labels for all points
-print("Predicting color indices on the full image (k-means)")
-t0 = time()
-labels = kmeans.predict(image_array)
-print("done in %0.3fs." % (time() - t0))
-
-
-codebook_random = shuffle(image_array, random_state=0)[:n_colors]
-print("Predicting color indices on the full image (random)")
-t0 = time()
-labels_random = pairwise_distances_argmin(codebook_random,
-                                          image_array,
-                                          axis=0)
-print("done in %0.3fs." % (time() - t0))
+# #############################################################################
+# Plot result
+fig = plt.figure()
+ax = p3.Axes3D(fig)
+ax.view_init(7, -80)
+for l in np.unique(label):
+    ax.scatter(X[label == l, 0], X[label == l, 1], X[label == l, 2],
+               color=plt.cm.jet(np.float(l) / np.max(label + 1)),
+               s=20, edgecolor='k')
+plt.title('Without connectivity constraints (time %.2fs)' % elapsed_time)
 
 
-def recreate_image(codebook, labels, w, h):
-    """Recreate the (compressed) image from the code book & labels"""
-    d = codebook.shape[1]
-    image = np.zeros((w, h, d))
-    label_idx = 0
-    for i in range(w):
-        for j in range(h):
-            image[i][j] = codebook[labels[label_idx]]
-            label_idx += 1
-    return image
+# #############################################################################
+# Define the structure A of the data. Here a 10 nearest neighbors
+from sklearn.neighbors import kneighbors_graph
+connectivity = kneighbors_graph(X, n_neighbors=10, include_self=False)
 
-# Display all results, alongside original image
-plt.figure(1)
-plt.clf()
-plt.axis('off')
-plt.title('Original image (96,615 colors)')
-plt.imshow(china)
+# #############################################################################
+# Compute clustering
+print("Compute structured hierarchical clustering...")
+st = time.time()
+ward = AgglomerativeClustering(n_clusters=6, connectivity=connectivity,
+                               linkage='ward').fit(X)
+elapsed_time = time.time() - st
+label = ward.labels_
+print("Elapsed time: %.2fs" % elapsed_time)
+print("Number of points: %i" % label.size)
 
-plt.figure(2)
-plt.clf()
-plt.axis('off')
-plt.title('Quantized image (64 colors, K-Means)')
-plt.imshow(recreate_image(kmeans.cluster_centers_, labels, w, h))
+# #############################################################################
+# Plot result
+fig = plt.figure()
+ax = p3.Axes3D(fig)
+ax.view_init(7, -80)
+for l in np.unique(label):
+    ax.scatter(X[label == l, 0], X[label == l, 1], X[label == l, 2],
+               color=plt.cm.jet(float(l) / np.max(label + 1)),
+               s=20, edgecolor='k')
+plt.title('With connectivity constraints (time %.2fs)' % elapsed_time)
 
-plt.figure(3)
-plt.clf()
-plt.axis('off')
-plt.title('Quantized image (64 colors, Random)')
-plt.imshow(recreate_image(codebook_random, labels_random, w, h))
 plt.show()
